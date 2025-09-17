@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FusionX Garba Night Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4, #FFEAA7);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Decorative elements */
+        .mandala {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .mandala-1 {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: -150px;
+            border: 2px solid rgba(255,215,0,0.3);
+        }
+
+        .mandala-2 {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: -100px;
+            border: 2px solid rgba(255,69,0,0.3);
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .floating-elements::before,
+        .floating-elements::after {
+            content: '🪔';
+            position: absolute;
+            font-size: 30px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-elements::before {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-elements::after {
+            top: 70%;
+            right: 10%;
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .container {
+            max-width: 700px;
+            margin-top: 30px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .main-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .header-section {
+            background: linear-gradient(135deg, #FF6B35, #F7931E, #FFD700);
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="30" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="30" cy="80" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="70" cy="70" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: sparkle 10s linear infinite;
+        }
+
+        @keyframes sparkle {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .event-title {
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .event-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.9);
+            font-weight: 300;
+            margin-bottom: 25px;
+        }
+
+        .event-details {
+            background: rgba(255,255,255,0.2);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .event-details p {
+            margin-bottom: 8px;
+            color: white;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .event-details i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .form-section {
+            padding: 40px 30px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #FF6B35, #F7931E);
+            border-radius: 2px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-label i {
+            margin-right: 8px;
+            color: #FF6B35;
+        }
+
+        .form-control, .form-select {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 12px 15px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #FF6B35;
+            box-shadow: 0 0 20px rgba(255,107,53,0.2);
+            background: white;
+        }
+
+        .ticket-highlight {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 10px;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 8px 16px rgba(255,165,0,0.3);
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #FF6B35, #F7931E);
+            border: none;
+            border-radius: 15px;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(255,107,53,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(255,107,53,0.4);
+        }
+
+        .alert {
+            border-radius: 12px;
+            border: none;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .alert-success {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .alert-danger {
+            background: linear-gradient(135deg, #dc3545, #fd7e14);
+            color: white;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .event-title {
+                font-size: 2.5rem;
+            }
+            
+            .container {
+                margin-top: 20px;
+                padding: 0 15px;
+            }
+            
+            .header-section, .form-section {
+                padding: 30px 20px;
+            }
+            
+            .mandala-1, .mandala-2 {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="text-center mb-4">
+            <h1 class="event-title">🎭 FusionX Garba Night 🎭</h1>
+            <p class="event-subtitle">✨ Dance to the Rhythm of Tradition ✨</p>
+            
+            <div class="event-details">
+                <p><i class="fas fa-calendar-alt"></i><strong>Saturday, 27th September, 6 PM</strong></p>
+                <p><i class="fas fa-map-marker-alt"></i><strong>Bouncers Turf, Paithan Road</strong></p>
+                <p><i class="fas fa-city"></i>Chhatrapati Sambhajinagar, Aurangabad</p>
+                <p><i class="fas fa-phone"></i>9322609066, 9209283490</p>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body text-center">
+                <h5 class="card-title">Step 1: Make Your Payment</h5>
+                <p>Scan the QR code below to pay using any UPI app.</p>
+                <img src="{{ url_for('static', filename='payment_qr.jpg') }}" alt="Payment QR Code" class="img-fluid" style="max-width: 250px;">
+                <p class="mt-2"><strong>UPI ID:</strong> mhasket26@oksbi</p>
+                <p class="mt-2 text-danger">After payment, please upload the screenshot in the form below.</p>
+            </div>
+        </div>
+
+        <h4 class="mb-3">Step 2: Fill Your Details & Upload Proof</h4>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        <i class="fas fa-info-circle me-2"></i>{{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="/register" method="post" enctype="multipart/form-data">
+            <div class="mb-4">
+                <label for="full_name" class="form-label">
+                    <i class="fas fa-user"></i>Full Name
+                </label>
+                <input type="text" class="form-control" id="full_name" name="full_name" required>
+            </div>
+
+            <div class="mb-4">
+                <label for="phone_number" class="form-label">
+                    <i class="fas fa-mobile-alt"></i>Phone Number
+                </label>
+                <input type="number" class="form-control" id="phone_number" name="phone_number" required>
+            </div>
+
+            <div class="mb-4">
+                <label for="email" class="form-label">
+                    <i class="fas fa-envelope"></i>Email Address
+                </label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label">
+                    <i class="fas fa-ticket-alt"></i>Select Tickets
+                </label>
+                <div id="ticket-selection">
+                    {% for option, price in ticket_prices.items() %}
+                        <div class="input-group mb-3">
+                            <button type="button" class="btn btn-outline-secondary btn-minus" data-ticket-type="{{ option }}">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <span class="input-group-text">{{ option }} (₹{{ price }})</span>
+                            <input type="number" class="form-control ticket-quantity" 
+                                   data-ticket-type="{{ option }}" data-ticket-price="{{ price }}" 
+                                   value="0" min="0" max="10" name="quantity_{{ option | replace(' ', '_') }}">
+                            <button type="button" class="btn btn-outline-secondary btn-plus" data-ticket-type="{{ option }}">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="ticket-highlight mt-3">
+                    Total Amount: ₹<span id="total-amount">0</span>
+                </div>
+
+                <div class="ticket-highlight mt-2">
+                    🎉 Group of 6 Special Offer: Pay for 5, get 1 FREE! 🎉
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label for="payment_proof" class="form-label">
+                    <i class="fas fa-upload"></i>Upload Payment Proof
+                </label>
+                <input type="file" class="form-control" id="payment_proof" name="payment_proof" accept="image/*,.pdf" required>
+                <small class="form-text text-muted">
+                    <i class="fas fa-info-circle"></i> Upload screenshot or PDF of your payment
+                </small>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-paper-plane me-2"></i>Register for Garba Night
+            </button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ticketQuantities = document.querySelectorAll('.ticket-quantity');
+            const totalAmountSpan = document.getElementById('total-amount');
+            const btnMinuses = document.querySelectorAll('.btn-minus');
+            const btnPluses = document.querySelectorAll('.btn-plus');
+
+            function calculateTotal() {
+                let total = 0;
+                ticketQuantities.forEach(input => {
+                    const quantity = parseInt(input.value);
+                    const price = parseFloat(input.dataset.ticketPrice);
+                    if (!isNaN(quantity) && quantity > 0) {
+                        total += quantity * price;
+                    }
+                });
+                totalAmountSpan.textContent = total;
+            }
+
+            ticketQuantities.forEach(input => {
+                input.addEventListener('change', calculateTotal);
+                input.addEventListener('keyup', calculateTotal);
+            });
+
+            btnMinuses.forEach(button => {
+                button.addEventListener('click', function() {
+                    const ticketType = this.dataset.ticketType;
+                    const quantityInput = document.querySelector(`.ticket-quantity[data-ticket-type="${ticketType}"]`);
+                    let currentValue = parseInt(quantityInput.value);
+                    if (currentValue > 0) {
+                        quantityInput.value = currentValue - 1;
+                        calculateTotal();
+                    }
+                });
+            });
+
+            btnPluses.forEach(button => {
+                button.addEventListener('click', function() {
+                    const ticketType = this.dataset.ticketType;
+                    const quantityInput = document.querySelector(`.ticket-quantity[data-ticket-type="${ticketType}"]`);
+                    let currentValue = parseInt(quantityInput.value);
+                    if (currentValue < 10) { // Assuming a max of 10 tickets per type
+                        quantityInput.value = currentValue + 1;
+                        calculateTotal();
+                    }
+                });
+            });
+
+            calculateTotal(); // Initial calculation on page load
+        });
+    </script>
+</body>
+</html>
