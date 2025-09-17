@@ -11,17 +11,17 @@ from email.mime.base import MIMEBase
 from email import encoders
 
 app = Flask(__name__)
-app.secret_key = 'supersecretkey'
-app.config['UPLOAD_FOLDER'] = 'uploads/'
+app.secret_key = os.environ.get('FLASK_SECRET_KEY')
+app.config['UPLOAD_FOLDER'] = os.environ.get('UPLOAD_FOLDER')
+
 
 # Email configuration
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')  # Your Gmail address
-app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')  # Your Gmail app password
-ADMIN_EMAIL = 'fusionxgarba@gmail.com'
-
+app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER')
+app.config['MAIL_PORT'] = int(os.environ.get('MAIL_PORT', 587))
+app.config['MAIL_USE_TLS'] = os.environ.get('MAIL_USE_TLS', 'True') == 'True'
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
+ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL')
 TICKET_PRICES = {
     "Female Stag": 249,
     "Male Stag": 299,
@@ -155,3 +155,4 @@ if __name__ == '__main__':
         os.makedirs(app.config['UPLOAD_FOLDER'])
 
     app.run(debug=True)
+
