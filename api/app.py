@@ -148,11 +148,12 @@ def register():
 @app.route('/success')
 def success():
     ticket_code = request.args.get('ticket_code')
-    return render_template('success.html', ticket_code=ticket_code)
+    return render_template('register.html', ticket_code=ticket_code)
 
 if __name__ == '__main__':
     if not os.path.exists(app.config['UPLOAD_FOLDER']):
         os.makedirs(app.config['UPLOAD_FOLDER'])
 
     app.run(debug=True)
+
 
